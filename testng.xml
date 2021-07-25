@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="TestSuite" parallel="tests" thread-count="2">
+    <parameter name="selectCategory" value="F11/moda"/>
+    <parameter name="category" value="Žene"/>
+    <parameter name="color" value="Crna"/>
+    <parameter name="filterMethod" value="Prodavac"/>
+    <parameter name="filter" value="Watch is Watch"/>
+    <parameter name="product" value="Daniel Wellington Ručni sat DW00100415"/>
+    <parameter name="productName" value="Daniel Wellington Ručni sat DW00100415"/>
+    <test name="TestChrome">
+        <parameter name="browser" value="CHROME"/>
+        <classes >
+            <class name="tests.Shoppster">
+                <methods>
+                    <include name="products"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+<!--    <test name="TestFirefox">-->
+<!--        <parameter name="browser" value="FIREFOX"/>-->
+<!--        <classes >-->
+<!--            <class name="tests.Shoppster">-->
+<!--                <methods>-->
+<!--                    <include name="products"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
+</suite>
