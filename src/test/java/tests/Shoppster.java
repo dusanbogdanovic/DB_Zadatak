@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -9,6 +10,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pom.BasePage;
 import pom.ProductsPage;
+import pom.SignUpPage;
 
 public class Shoppster extends BaseTest{
 
@@ -23,7 +25,13 @@ public class Shoppster extends BaseTest{
         tearDown();
     }
 
-    @Test
+
+    @Test (description = "Product search")
+    @Description("Pretraga proizvoda")
+    @Severity(SeverityLevel.BLOCKER)
+    @Epic("EP001")
+    @Feature("F001")
+    @Story("S001")
     @Parameters({"selectCategory", "category", "color", "filterMethod", "filter", "product", "productName"})
     public void products(String selectCategory, String category, String color, String filterMethod, String filter, String product, String productName) throws InterruptedException {
         driver.get("https://www.shoppster.com/sr-RS/");
@@ -48,28 +56,53 @@ public class Shoppster extends BaseTest{
 
         String result = driver.findElement(By.cssSelector("h2.product__name")).getText();
         Assert.assertEquals(result, productName);
+    }
 
+    @Test (description = "Sign Up")
+    @Description("Registracija korisnika")
+    @Parameters({"ime", "prezime", "email", "password", "dan", "mesec", "godina", "pol", "potvrda", "account"})
+    public void signUp(String ime, String prezime, String email, String password, String dan, String mesec, String godina, String pol, String potvrda, String account) throws InterruptedException {
+        driver.get("https://www.shoppster.com/sr-RS/");
 
+        wdWait = new WebDriverWait(driver, 30);
+        BasePage basePage = new BasePage(driver,wdWait);
 
-        //div[@class="plp__product-name" and contains(text(),'Daniel Wellington Ručni sat DW00100415')]
-        //div[@class="plp__item plp__item--grid col-12 col-sm-6 col-md-4 col-xl-3 col-xxxl-2"]//div[contains(text(),'Daniel Wellington Ručni sat DW00100415')]
-        //a[@class="vendor__hyperlink" and contains(text(),'Watch is Watch doo')]
+        basePage.acceptCookies();
+        basePage.clickLoginButton();
 
+        SignUpPage signUpPage = new SignUpPage(driver, wdWait);
 
-        //1. Assertacije
-        //2. Ceo test parametrizovan (xml testng)
-        //2.b paralelno
-        //2.c multy browser
-        //3. Dodati anotacije za allure
-        //4. 1 page koji nije vec pokriven
+        signUpPage.clickSignUpButton();
+        pause(5);
+        signUpPage.selectCustomerType();
+        pause(5);
+        signUpPage.insertFirstName(ime);
+        pause(1);
+        signUpPage.insertLastName(prezime);
+        pause(1);
+        signUpPage.insertEmail(email);
+        pause(1);
+        signUpPage.insertPassword(password);
+        pause(1);
+        signUpPage.confirmPassword(password);
+        pause(1);
+        signUpPage.insertBirthDay(dan);
+        pause(1);
+        signUpPage.clickMonth();
+        pause(1);
+        signUpPage.selectMonth(mesec);
+        pause(1);
+        signUpPage.insertYear(godina);
+        pause(1);
+        signUpPage.selectGender(pol);
+        pause(1);
+        signUpPage.confirm(potvrda);
+        signUpPage.submit();
+        pause(5);
+
+        String signedIn = driver.findElement(By.xpath("//span[@class=\"mini-login__greeting\"]")).getText();
+        Assert.assertEquals(signedIn, account);
 
     }
 
-    @Test
-
-    public void signUp() throws InterruptedException {
-
-    }
-
-    //div[@class="mini-login__component"]//h5[@class="footer__headline--desktop" and contains(text(), 'Moj nalog')] - asertacija
 }

@@ -9,24 +9,36 @@
     <parameter name="filter" value="Watch is Watch"/>
     <parameter name="product" value="Daniel Wellington Ručni sat DW00100415"/>
     <parameter name="productName" value="Daniel Wellington Ručni sat DW00100415"/>
+    <parameter name="ime" value="Test"/>
+    <parameter name="prezime" value="Test"/>
+    <parameter name="email" value="test"/>
+    <parameter name="password" value="Test123456"/>
+    <parameter name="dan" value="15"/>
+    <parameter name="mesec" value="Januar"/>
+    <parameter name="godina" value="1990"/>
+    <parameter name="pol" value=" Muško "/>
+    <parameter name="potvrda" value="Pročitao/la sam i prihvatam Shoppster"/>
+    <parameter name="account" value="Test"/>
     <test name="TestChrome">
         <parameter name="browser" value="CHROME"/>
         <classes >
             <class name="tests.Shoppster">
                 <methods>
                     <include name="products"/>
+                    <include name="signUp"/>
                 </methods>
             </class>
         </classes>
     </test>
-<!--    <test name="TestFirefox">-->
-<!--        <parameter name="browser" value="FIREFOX"/>-->
-<!--        <classes >-->
-<!--            <class name="tests.Shoppster">-->
-<!--                <methods>-->
-<!--                    <include name="products"/>-->
-<!--                </methods>-->
-<!--            </class>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="TestFirefox">
+        <parameter name="browser" value="FIREFOX"/>
+        <classes >
+            <class name="tests.Shoppster">
+                <methods>
+                    <include name="products"/>
+                    <include name="signUp"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>

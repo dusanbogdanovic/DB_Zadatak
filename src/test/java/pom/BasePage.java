@@ -8,8 +8,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.List;
-
 public class BasePage extends CommonActions{
     WebDriver driver;
     WebDriverWait webDriverWait;
@@ -33,7 +31,9 @@ public class BasePage extends CommonActions{
         driver.findElement(By.cssSelector("[href='/sr-RS/c/"+category+"']")).click();
     }
 
-
+    public void clickLoginButton() throws InterruptedException {
+        clickElement(driver.findElement(By.xpath("//span[text()='Uloguj se']/..")));
+    }
 
     public void acceptCookies() throws InterruptedException {
         clickElement(acceptCookies);
